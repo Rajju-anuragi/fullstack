@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // const { type } = require('node:os');
 module.exports = mongoose.model("Order", new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    Products: [
+    items: [
         {
             product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
             quantity: {

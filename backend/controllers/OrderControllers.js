@@ -21,7 +21,7 @@ const createOrder = async (req, res) => {
                 paymentId
             });
             await newOrder.save();
-            const message = `Dear ${req.user.firstName},\n\n Thank you for your order !.Your order has been successfully  created with the following details\n\n order Id:${orders._id} \n Total amount${totalAmount} \n shipping address:${address}\n/n
+            const message = `Dear ${req.user.firstName},\n\n Thank you for your order !.Your order has been successfully  created with the following details\n\n order Id:${newOrder._id} \n Total amount${totalAmount} \n shipping address:${address}\n\n
             We will notify you once your order is shippped .\n\nBest regards,\nShopNow Team`
             await sendEmail(req.user.email, 'Order created', message);
             res.status(201).json({ message: ' Order created successfully',newOrder});
@@ -29,7 +29,8 @@ const createOrder = async (req, res) => {
 
         }
     } catch (error) {
-        res.status(500).json({ message: 'Error creating order', error });
+        console.error("Error in createOrder:",error );
+        res.status(500).json({ message: 'Error creating order', error:error.message });
 
     }
 };
@@ -38,7 +39,7 @@ const myorders = async (req, res) => {
     try {
         const userOrders = await Order.find({ user: req.user._id })
             .populate('user', 'firstName email')
-            .populate('items.productId', 'firstName price');
+            .populate('items.product', 'firstName price');
         res.status(200).json(userOrders);
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving orders', error });
@@ -62,17 +63,17 @@ const updateOrderStatus =async (req,res)=>{
     try {
         const{status} = req.body;
         const order = await Order.findById(req.params.id);
-        if(Order){
-            Order.status=status;
-            await Order.save();
-            res.json({message:'Order Status updated',Order});
+        if(order){
+            order.status=status;
+            await order.save();
+            res.json({message:'Order Status updated',order});
 
         }
         else{
             res.status(404).json({message:'Order not found'});
         }
     } catch (error) {
-        return res.status(500).json({message:'Error updating order status',error});        
+        return res.status(500).json({message:'Error updating order status',error:error.message});        
     }
 }
 module.exports = {

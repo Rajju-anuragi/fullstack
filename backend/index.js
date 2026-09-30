@@ -22,7 +22,7 @@ app.use('/api/auth', require('./routes/authRoute'));
 app.use('/api/products',require('./routes/productsRoutes.js'));
 // app.use('/api/cart',require('./routes/cartRoutes'));
 app.use('/api/orders',require('./routes/ordersRoutes'));
-// app.use('/api/payment',require('./routes/paymentRoutes.js/index.js'));
+app.use('/api/payment',require('./routes/paymentRoutes'));
 // app.use('/api/analytics',require('./routes/anlyticsRoutes.js/index.js'));
 
 
@@ -30,5 +30,5 @@ app.use('/api/orders',require('./routes/ordersRoutes'));
 const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => {
-    console.log(`shopNow app listen on proutesort on ${PORT}`);
+    console.log(`shopNow app listen on port on ${PORT}`);
 });
