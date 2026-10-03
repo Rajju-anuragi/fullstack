@@ -11,4 +11,3 @@ router.route('/:id/status').put(Protect,admin,updateOrderStatus);
 
 
 module.exports = router;
-
