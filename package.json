@@ -1,0 +1,27 @@
+{
+  "name": "ShopNow-full-stack",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Rajju-anuragi/fullstack#readme",
+  "bugs": {
+    "url": "https://github.com/Rajju-anuragi/fullstack/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rajju-anuragi/fullstack.git"
+  },
+  "license": "ISC",
+  "author": "Rajju anuragi",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "install": "cd backend && npm install && cd ../frontend && npm install",
+    "dev:server": "cd backend && npm run dev",
+    "dev:client": "cd frontend && npm start",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "build": "cd frontend && npm run build"
+  },
+  "dependencies": {
+    "concurrently": "^10.0.6"
+  }
+}
